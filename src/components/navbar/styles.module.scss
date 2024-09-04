@@ -1,0 +1,55 @@
+@import "@/variables.scss";
+
+.container {
+  height: 61px;
+  display: flex;
+  padding: 0 5%;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  background-color: white;
+  width: 100vw;
+  z-index: 1000;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+  @media (min-width: 768px) {
+    padding: 0 10%;
+  }
+  img {
+    background-color: white;
+    padding: 5px;
+    transform: translateY(25%);
+    border-radius: 3px;
+    z-index: 100;
+
+    @media (min-width: 768px) {
+      border-radius: 13px;
+    }
+  }
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  line-height: 18px;
+  text-transform: uppercase;
+
+  @media (min-width: 768px) {
+    gap: 20px;
+  }
+
+  svg {
+    margin-left: 20px;
+    @media (min-width: 768px) {
+      margin-left: 60px;
+    }
+  }
+  a {
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@import "@/variables.scss";
+
+.container {
+  a {
+    font-size: 14px;
+  }
+  a:hover {
+    color: $primary-color;
+  }
+}
