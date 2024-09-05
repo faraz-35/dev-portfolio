@@ -1,6 +1,6 @@
 const ContactForm = () => {
   return (
-    <div>
+    <div id="contact-us">
       <h1>Contact Us</h1>
       <p>
         Choose us for our commitment to quality, innovation, and delivering

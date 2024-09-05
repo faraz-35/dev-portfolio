@@ -1,6 +1,9 @@
 const Services = () => {
   return (
-    <div className="h-[100vh] w-full flex flex-col justify-center items-center ">
+    <div
+      id="services"
+      className="h-[100vh] w-full flex flex-col justify-center items-center "
+    >
       <h1>Services</h1>
       <p>
         Unleash innovation with our full-spectrum web and app development
