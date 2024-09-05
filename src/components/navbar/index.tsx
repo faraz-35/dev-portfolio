@@ -1,29 +1,33 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-
-import classes from "./styles.module.scss";
-
-import { Roboto } from "next/font/google";
-
-const roboto = Roboto({
-  weight: "700",
-  subsets: ["latin"],
-});
 
 const Navbar = () => {
-  const router = useRouter();
-
   return (
-    <div className={classes.container}>
-      <div className={`${roboto.className} `}>Lightangle Technologies</div>
-      <div className={classes.links}>
-        <Link href="#about-us">About Us</Link>
-        <Link href="#services">Services</Link>
-        <Link href="#contact-us">Contact Us</Link>
+    <nav className="fixed top-0 w-full h-[61px] bg-white shadow-md flex justify-between items-center px-6 lg:px-20 z-50">
+      <div className="text-pri font-bold text-lg ">Lightangle Technologies</div>
+      <div className="flex items-center gap-4 lg:gap-8 text-sm lg:text-base text-pri uppercase">
+        <Link
+          href="#about-us"
+          className="hover:text-sec transition duration-200 text-sm font-semibold"
+        >
+          About Us
+        </Link>
+        <Link
+          href="#services"
+          className="hover:text-sec transition duration-200 text-sm font-semibold"
+        >
+          Services
+        </Link>
+        <Link
+          href="#contact-us"
+          className="hover:text-sec transition duration-200 text-sm font-semibold"
+        >
+          Contact Us
+        </Link>
       </div>
-    </div>
+    </nav>
   );
 };
+
 export default Navbar;
