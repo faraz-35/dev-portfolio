@@ -23,13 +23,7 @@ const formatNumber = (num: number) => {
   return num < 10 ? `0${num}` : `${num}`;
 };
 
-const isSameMonth = (date1: string, date2: string) => {
-  const d1 = new Date(date1);
-  const d2 = new Date(date2);
-  return (
-    d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear()
-  );
-};
+
 
 const formatAmount = (amount?: number) => {
   return new Intl.NumberFormat("en-US", {
@@ -47,7 +41,6 @@ const trackPageVisit = async (referrer: string) => {
 export {
   formatDate,
   formatNumber,
-  isSameMonth,
   formatAmount,
   formatTime,
   trackPageVisit,

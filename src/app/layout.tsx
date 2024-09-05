@@ -9,10 +9,10 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Baydaar Experiences",
+  title: "Lightangle Technologies",
   description: "",
   icons: {
-    icon: "/images/BaydaarLogo.png",
+    icon: "/images/Logo.png",
   },
 };
 
@@ -24,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/images/BaydaarLogo.png" sizes="any" />
+        <link rel="icon" href="/images/Logo.png" sizes="any" />
       </head>
-      <body className={`${poppins.className} overflow-x-hidden w-[100vw]  `}>
+      <body
+        className={`${poppins.className} overflow-x-hidden w-[100vw] pt-[61px] `}
+      >
         {children}
       </body>
     </html>
