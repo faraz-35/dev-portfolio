@@ -2,30 +2,47 @@ import { services } from "@/utils/constants";
 
 const ServiceDetail = () => {
   return (
-    <>
-      {services.map(({ name, heading, features }) => (
-        <div
+    <div
+      id="service-details"
+      className="min-h-screen bg-bg text-pri px-6 py-12 space-y-20"
+    >
+      {services.map(({ name, heading, features }, index) => (
+        <section
+          id={`service-${index}`}
           key={name}
-          className="h-[100vh] flex flex-col items-center justify-center bg-bg text-pri px-6 py-8"
+          className={`relative p-10 lg:p-16 flex flex-col  lg:flex-row items-center justify-between gap-10 ${
+            index % 2 === 1 ? "lg:flex-row-reverse" : ""
+          }`}
         >
-          <h1 className="text-4xl font-bold mb-4 animate-fade-in">{name}</h1>
-          <p className="text-lg max-w-2xl text-center mb-6 animate-slide-up">
-            {heading}
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl animate-fade-in">
-            {features.map(({ heading, text }) => (
-              <div
-                key={text}
-                className="bg-white text-pri p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300"
-              >
-                <h4 className="text-xl font-semibold mb-2">{heading}</h4>
-                <p className="text-base">{text}</p>
+          {/* Heading Section */}
+          <div className="flex-1 text-center lg:text-left space-y-6">
+            <h1 className="text-6xl font-extrabold tracking-wide animate-slide-in">
+              {name}
+            </h1>
+            <p className="text-2xl leading-relaxed max-w-2xl animate-fade-up">
+              {heading}
+            </p>
+          </div>
+
+          {/* Unified Feature Display */}
+          <div className="relative w-1/2 bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg p-8 rounded-xl shadow-md ">
+            <div
+              className={`absolute top-0 ${
+                index % 2 === 0 ? "left-0" : "right-0"
+              } w-64 h-64 bg-sec opacity-10 rounded-full blur-2xl -z-0 transform rotate-45`}
+            ></div>
+            {features.map(({ heading, text }, featureIndex) => (
+              <div key={text} className="mb-8 last:mb-0">
+                <h4 className="text-xl font-bold text-sec mb-2 animate-slide-left">
+                  {`${featureIndex + 1}. ${heading}`}
+                </h4>
+                <p className="text-lg leading-relaxed text-black">{text}</p>
               </div>
             ))}
           </div>
-        </div>
+        </section>
       ))}
-    </>
+    </div>
   );
 };
 

@@ -1,19 +1,43 @@
+import Link from "next/link";
+
 const Services = () => {
   return (
     <div
       id="services"
-      className="h-[100vh] w-full flex flex-col justify-center items-center bg-bg text-pri px-6 py-8"
+      className="relative h-[100vh] w-full flex flex-col justify-center items-center bg-gradient-to-br from-bg to-white text-pri px-6 py-8 overflow-hidden"
     >
-      <h1 className="text-5xl font-extrabold mb-4 animate-fade-in">Services</h1>
-      <p className="text-lg max-w-2xl text-center mb-6 animate-slide-up">
+      {/* Decorative Background Elements */}
+      <div className="absolute top-10 left-20 w-64 h-64 bg-sec opacity-20 rounded-full blur-2xl animate-pulse"></div>
+      <div className="absolute bottom-10 right-20 w-72 h-72 bg-pri opacity-30 rounded-full blur-3xl animate-spin-slow"></div>
+
+      {/* Heading Section */}
+      <h1 className="text-6xl font-extrabold mb-4 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec">
+        Services
+      </h1>
+
+      {/* Subheading Section */}
+      <p className="text-xl max-w-3xl text-center mb-8 animate-fade-up leading-relaxed text-gray-800">
         Unleash innovation with our full-spectrum web and app development
         services. We take your vision from concept to completion, crafting
         exceptional digital solutions using cutting-edge technology to create
         elegant and high-performance websites and mobile apps.
       </p>
-      <button className="mt-8 px-6 py-2 bg-sec text-white font-semibold rounded-full shadow-md hover:bg-pri transition duration-300">
-        Explore Our Services
-      </button>
+
+      {/* Call to Action Button */}
+      <Link
+        href="#service-details"
+        className="relative mt-8 px-8 py-3 bg-sec text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300 group"
+      >
+        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-pri to-sec opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
+        <span className="relative z-0">Explore Our Services</span>
+      </Link>
+
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 flex flex-col items-center animate-bounce">
+        <span className="block w-2 h-2 mb-1 bg-pri rounded-full"></span>
+        <span className="block w-2 h-2 mb-1 bg-pri rounded-full"></span>
+        <span className="block w-2 h-2 bg-pri rounded-full"></span>
+      </div>
     </div>
   );
 };
