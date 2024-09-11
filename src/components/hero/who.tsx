@@ -27,7 +27,6 @@ const WhoWeAre = () => {
         className="relative mt-8 px-8 py-3 bg-sec text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300 group"
       >
         <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-pri to-sec opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
-
         <span className="relative z-0">Learn more</span>
       </Link>
     </div>
