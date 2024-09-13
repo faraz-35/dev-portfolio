@@ -1,11 +1,12 @@
 "use client";
 
+import { apiUrl } from "@/utils/constants";
 import { useState, ChangeEvent, FormEvent } from "react";
 
 interface FormData {
   name: string;
   email: string;
-  budget: string[];
+  budget: string;
   message: string;
 }
 
@@ -13,7 +14,7 @@ const ContactForm = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
-    budget: [],
+    budget: "",
     message: "",
   });
 
@@ -28,21 +29,34 @@ const ContactForm = () => {
   };
 
   const handleCheckboxChange = (range: string) => {
-    setFormData((prevData) => {
-      const newBudget = prevData.budget.includes(range)
-        ? prevData.budget.filter((item) => item !== range)
-        : [...prevData.budget, range];
-      return {
-        ...prevData,
-        budget: newBudget,
-      };
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      budget: prevData.budget === range ? "" : range,
+    }));
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log(formData);
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      console.log("Form submitted successfully:", result);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   return (
@@ -113,7 +127,7 @@ const ContactForm = () => {
               <label
                 key={range}
                 className={`border-2 border-pri p-2 rounded cursor-pointer flex items-center justify-center transition group ${
-                  formData.budget.includes(range)
+                  formData.budget == range
                     ? "bg-sec text-white"
                     : "hover:bg-sec hover:text-white"
                 }`}
@@ -121,7 +135,7 @@ const ContactForm = () => {
                 <input
                   type="checkbox"
                   className="hidden"
-                  checked={formData.budget.includes(range)}
+                  checked={formData.budget == range}
                   onChange={() => handleCheckboxChange(range)}
                 />
                 <span className="group-hover:text-white transition">

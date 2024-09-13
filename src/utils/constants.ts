@@ -1,4 +1,5 @@
-const apiUrl = "https://baydartravels.fawad.xyz/api";
+const apiUrl =
+  "https://lir7cwdywd.execute-api.us-east-1.amazonaws.com/Prod/contact/";
 
 const services = [
   {
