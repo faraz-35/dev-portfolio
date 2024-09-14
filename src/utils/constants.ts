@@ -1,5 +1,5 @@
 const apiUrl =
-  "https://lir7cwdywd.execute-api.us-east-1.amazonaws.com/Prod/contact/";
+  "https://hb90tym4fd.execute-api.us-east-1.amazonaws.com/Prod/contact/";
 
 const services = [
   {
