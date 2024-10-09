@@ -2,6 +2,7 @@
 
 import { apiUrl } from "@/utils/constants";
 import { useState, ChangeEvent, FormEvent } from "react";
+import axios from "axios";
 
 interface FormData {
   name: string;
@@ -10,13 +11,24 @@ interface FormData {
   message: string;
 }
 
+interface FormErrors {
+  name?: string;
+  email?: string;
+  budget?: string;
+  message?: string;
+}
+
+const initialState = {
+  name: "",
+  email: "",
+  budget: "",
+  message: "",
+};
+
 const ContactForm = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    budget: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState<FormData>(initialState);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -26,6 +38,10 @@ const ContactForm = () => {
       ...prevData,
       [name]: value,
     }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
   const handleCheckboxChange = (range: string) => {
@@ -33,30 +49,50 @@ const ContactForm = () => {
       ...prevData,
       budget: prevData.budget === range ? "" : range,
     }));
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      budget: "",
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors: FormErrors = {};
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid";
+    }
+    if (!formData.budget) newErrors.budget = "Budget is required";
+    if (!formData.message) newErrors.message = "Message is required";
+    return newErrors;
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission logic here
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
     try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
+      const response = await axios.post(apiUrl, formData, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
       });
+      setFormData(initialState);
+      setIsModalOpen(true); // Open the modal on successful submission
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const result = await response.json();
-      console.log("Form submitted successfully:", result);
+      console.log("Form submitted successfully:", response.data);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -92,9 +128,14 @@ const ContactForm = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="border-b-2 border-pri bg-transparent p-2 focus:outline-none focus:border-sec transition duration-300 placeholder-transparent group-focus-within:placeholder:text-pri"
+            className={`border-b-2 bg-transparent p-2 focus:outline-none transition duration-300 placeholder-transparent group-focus-within:placeholder:text-pri ${
+              errors.name ? "border-red-500" : "border-pri focus:border-sec"
+            }`}
             placeholder="Enter your name"
           />
+          {errors.name && (
+            <span className="text-red-500 text-sm mt-1">{errors.name}</span>
+          )}
         </div>
 
         {/* Email Field */}
@@ -107,9 +148,14 @@ const ContactForm = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="border-b-2 border-pri bg-transparent p-2 focus:outline-none focus:border-sec transition duration-300 placeholder-transparent group-focus-within:placeholder:text-pri"
+            className={`border-b-2 bg-transparent p-2 focus:outline-none transition duration-300 placeholder-transparent group-focus-within:placeholder:text-pri ${
+              errors.email ? "border-red-500" : "border-pri focus:border-sec"
+            }`}
             placeholder="Enter your email"
           />
+          {errors.email && (
+            <span className="text-red-500 text-sm mt-1">{errors.email}</span>
+          )}
         </div>
 
         {/* Budget Range */}
@@ -120,16 +166,16 @@ const ContactForm = () => {
           <div className="flex gap-4 flex-wrap">
             {[
               "Low Budget",
-              "$5,000 - $10,000",
+              "$3,000 - $10,000",
               "$10,000 - $20,000",
               "$20,000+",
             ].map((range) => (
               <label
                 key={range}
-                className={`border-2 border-pri p-2 rounded cursor-pointer flex items-center justify-center transition group ${
+                className={`border-2 p-2 rounded cursor-pointer flex items-center justify-center transition group ${
                   formData.budget == range
-                    ? "bg-sec text-white"
-                    : "hover:bg-sec hover:text-white"
+                    ? "bg-sec text-white border-sec"
+                    : "border-pri hover:bg-sec hover:text-white"
                 }`}
               >
                 <input
@@ -144,6 +190,9 @@ const ContactForm = () => {
               </label>
             ))}
           </div>
+          {errors.budget && (
+            <span className="text-red-500 text-sm mt-1">{errors.budget}</span>
+          )}
         </div>
 
         {/* Message Field */}
@@ -156,9 +205,14 @@ const ContactForm = () => {
             name="message"
             value={formData.message}
             onChange={handleChange}
-            className="border-b-2 border-pri bg-transparent p-2 focus:outline-none focus:border-sec transition duration-300 placeholder-transparent group-focus-within:placeholder:text-pri"
+            className={`border-b-2 bg-transparent p-2 focus:outline-none transition duration-300 placeholder-transparent group-focus-within:placeholder:text-pri ${
+              errors.message ? "border-red-500" : "border-pri focus:border-sec"
+            }`}
             placeholder="Write your message"
           ></textarea>
+          {errors.message && (
+            <span className="text-red-500 text-sm mt-1">{errors.message}</span>
+          )}
         </div>
 
         {/* Submit Button */}
@@ -170,6 +224,22 @@ const ContactForm = () => {
           <span className="relative z-0">Submit</span>
         </button>
       </form>
+
+      {/* Success Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 className="text-2xl font-bold mb-4">Success!</h2>
+            <p className="mb-4">Your message has been sent successfully.</p>
+            <button
+              onClick={closeModal}
+              className="px-4 py-2 bg-sec text-white rounded-full hover:bg-pri transition duration-300"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
