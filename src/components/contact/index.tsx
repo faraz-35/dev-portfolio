@@ -69,7 +69,7 @@ const ContactForm = () => {
       <div className="absolute bottom-0 left-1/4 w-40 h-40 bg-pri opacity-40 rounded-full blur-3xl z-0 animate-spin-slow"></div>
 
       {/* Heading Section */}
-      <h1 className="text-6xl font-extrabold mb-4 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec">
+      <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold lg:font-extrabold  mb-4 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec">
         Contact Us
       </h1>
       <p className="text-lg max-w-xl text-center mb-8 animate-fade-up leading-relaxed text-gray-800">

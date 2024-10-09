@@ -11,12 +11,12 @@ const WhoWeAre = () => {
       <div className="absolute -bottom-4 right-1/4 w-40 h-40 bg-pri opacity-30 rounded-full blur-3xl z-0 animate-spin-slow"></div>
 
       {/* Heading Section */}
-      <h1 className="text-6xl font-extrabold mb-6 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec leading-tight">
+      <h1 className="text-3xl md:text-4xl lg:text-6xl text-center  font-bold lg:font-extrabold  mb-6 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec leading-tight">
         Lightangle Technologies
       </h1>
 
       {/* Subheading Section */}
-      <p className="text-xl max-w-2xl text-center mb-8 animate-fade-up leading-relaxed text-gray-800">
+      <p className="text-lg lg:text-xl max-w-2xl text-center mb-8 animate-fade-up leading-relaxed text-gray-800">
         A creative technology firm driven by innovation and excellence in web
         and mobile development.
       </p>

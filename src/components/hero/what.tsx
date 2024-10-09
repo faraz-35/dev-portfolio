@@ -11,12 +11,12 @@ const WhatWeDo = () => {
       <div className="absolute bottom-0 right-1/2 w-80 h-80 bg-sec opacity-10 rounded-full blur-3xl z-0 animate-spin-slow"></div>
 
       {/* Heading Section */}
-      <h1 className="text-6xl font-extrabold mb-6 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec">
+      <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold lg:font-extrabold  mb-6 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec">
         What We Do
       </h1>
 
       {/* Subheading Section */}
-      <p className="text-xl max-w-2xl text-center mb-8 animate-fade-up leading-relaxed text-gray-800">
+      <p className="text-lg lg:text-xl max-w-2xl text-center mb-8 animate-fade-up leading-relaxed text-gray-800">
         We specialize in creating intuitive and scalable digital products that
         enhance user experiences.
       </p>

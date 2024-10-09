@@ -4,7 +4,7 @@ const ServiceDetail = () => {
   return (
     <div
       id="service-details"
-      className="min-h-screen bg-bg text-pri px-6 py-12 space-y-20"
+      className="min-h-screen bg-bg text-pri  py-12 space-y-20"
     >
       {services.map(({ name, heading, features }, index) => (
         <section
@@ -16,16 +16,16 @@ const ServiceDetail = () => {
         >
           {/* Heading Section */}
           <div className="flex-1 text-center lg:text-left space-y-6">
-            <h1 className="text-6xl font-extrabold tracking-wide animate-slide-in">
+            <h1 className="text-xl  md:text-4xl lg:text-6xl font-bold lg:font-extrabold  tracking-wide animate-slide-in">
               {name}
             </h1>
-            <p className="text-2xl leading-relaxed max-w-2xl animate-fade-up">
+            <p className="text-xl lg:text-2xl leading-relaxed max-w-2xl animate-fade-up">
               {heading}
             </p>
           </div>
 
           {/* Unified Feature Display */}
-          <div className="relative w-1/2 bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg p-8 rounded-xl shadow-md ">
+          <div className="relative w-full lg:w-1/2 bg-white bg-opacity-40 backdrop-filter backdrop-blur-lg p-6 lg:p-8 rounded-xl shadow-md ">
             <div
               className={`absolute top-0 ${
                 index % 2 === 0 ? "left-0" : "right-0"

@@ -11,12 +11,12 @@ const Services = () => {
       <div className="absolute bottom-10 right-20 w-72 h-72 bg-pri opacity-30 rounded-full blur-3xl animate-spin-slow"></div>
 
       {/* Heading Section */}
-      <h1 className="text-6xl font-extrabold mb-4 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec">
+      <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold lg:font-extrabold  mb-4 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec">
         Services
       </h1>
 
       {/* Subheading Section */}
-      <p className="text-xl max-w-3xl text-center mb-8 animate-fade-up leading-relaxed text-gray-800">
+      <p className="text-lg lg:text-xl text-center mb-8 animate-fade-up leading-relaxed text-gray-800">
         Unleash innovation with our full-spectrum web and app development
         services. We take your vision from concept to completion, crafting
         exceptional digital solutions using cutting-edge technology to create
