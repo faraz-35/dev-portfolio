@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Services = () => {
   return (
-    <div
+    <section
       id="services"
       className="relative h-[100vh] w-full flex flex-col justify-center items-center bg-gradient-to-br from-bg to-white text-pri px-6 py-8 overflow-hidden"
     >
@@ -16,7 +16,7 @@ const Services = () => {
       </h1>
 
       {/* Subheading Section */}
-      <p className="text-lg lg:text-xl text-center mb-8 animate-fade-up leading-relaxed text-gray-800">
+      <p className="text-lg lg:text-xl text-center mb-8 animate-fade-up leading-relaxed text-gray-800 max-w-2xl">
         Unleash innovation with our full-spectrum web and app development
         services. We take your vision from concept to completion, crafting
         exceptional digital solutions using cutting-edge technology to create
@@ -38,7 +38,7 @@ const Services = () => {
         <span className="block w-2 h-2 mb-1 bg-pri rounded-full"></span>
         <span className="block w-2 h-2 bg-pri rounded-full"></span>
       </div>
-    </div>
+    </section>
   );
 };
 

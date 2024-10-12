@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  weight: ["400", "700"], // Specify the weights you want to use
+  subsets: ["latin"], // Specify the subsets you need
+});
 
 import { CgClose, CgMenu } from "react-icons/cg";
 const Navbar = () => {
@@ -11,36 +17,12 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  const MenuItems = ({ onClick }: { onClick?: () => void }) => (
-    <>
-      <Link
-        href="#about-us"
-        className="hover:text-sec transition duration-200 font-semibold"
-        onClick={onClick}
-      >
-        About Us
-      </Link>
-      <Link
-        href="#services"
-        className="hover:text-sec transition duration-200 font-semibold"
-        onClick={onClick}
-      >
-        Services
-      </Link>
-      <Link
-        href="#contact-us"
-        className="hover:text-sec transition duration-200 font-semibold"
-        onClick={onClick}
-      >
-        Contact Us
-      </Link>
-    </>
-  );
-
   return (
     <nav className="fixed top-0 w-[100vw] bg-white shadow-md z-50">
       <div className=" flex justify-between items-center h-[61px] px-6 md:px-8 lg:px-20">
-        <h1 className="text-pri font-bold text-base lg:text-lg uppercase">
+        <h1
+          className={`${roboto.className} text-pri font-bold text-base lg:text-lg uppercase`}
+        >
           Lightangle Tech
         </h1>
         <div className="lg:hidden">
@@ -64,5 +46,47 @@ const Navbar = () => {
     </nav>
   );
 };
+
+const MenuItems = ({ onClick }: { onClick?: () => void }) => (
+  <>
+    <Link
+      href="/"
+      className="hover:text-sec transition duration-200 font-semibold"
+      onClick={(e) => {
+        e.preventDefault(); // Prevent navigation
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+        onClick?.();
+      }}
+    >
+      About Us
+    </Link>
+    <Link
+      href="/"
+      className="hover:text-sec transition duration-200 font-semibold"
+      onClick={(e) => {
+        e.preventDefault(); // Prevent navigation
+        const section = document.getElementById("services");
+
+        section?.scrollIntoView({ behavior: "smooth", block: "start" });
+        onClick?.();
+      }}
+    >
+      Services
+    </Link>
+    <Link
+      href="/"
+      className="hover:text-sec transition duration-200 font-semibold"
+      onClick={(e) => {
+        e.preventDefault(); // Prevent navigation
+        const section = document.getElementById("contact-us");
+
+        section?.scrollIntoView({ behavior: "smooth", block: "start" });
+        onClick?.();
+      }}
+    >
+      Contact Us
+    </Link>
+  </>
+);
 
 export default Navbar;

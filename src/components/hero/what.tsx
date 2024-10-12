@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const WhatWeDo = () => {
   return (
-    <div
+    <section
       id="what-we-do"
       className="relative h-[100vh] w-full flex flex-col justify-center items-center bg-bg text-pri px-6 py-8 overflow-hidden"
     >
@@ -29,7 +29,7 @@ const WhatWeDo = () => {
         <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-pri to-sec opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
         <span className="relative z-0">Services</span>
       </Link>
-    </div>
+    </section>
   );
 };
 

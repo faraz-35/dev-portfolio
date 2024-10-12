@@ -18,6 +18,12 @@ interface FormErrors {
   message?: string;
 }
 
+interface ModalState {
+  loading: boolean;
+  error: string | null;
+  success: string | null;
+}
+
 const initialState = {
   name: "",
   email: "",
@@ -25,10 +31,16 @@ const initialState = {
   message: "",
 };
 
+const initialModalState: ModalState = {
+  loading: false,
+  error: null,
+  success: null,
+};
+
 const ContactForm = () => {
   const [formData, setFormData] = useState<FormData>(initialState);
   const [errors, setErrors] = useState<FormErrors>({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalState, setModalState] = useState<ModalState>(initialModalState);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -76,27 +88,37 @@ const ContactForm = () => {
       return;
     }
 
+    setModalState({ loading: true, error: null, success: null });
+
     try {
       const response = await axios.post(apiUrl, formData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      setFormData(initialState);
-      setIsModalOpen(true); // Open the modal on successful submission
 
-      console.log("Form submitted successfully:", response.data);
+      setFormData(initialState);
+      setModalState({
+        loading: false,
+        error: null,
+        success: "Your message has been sent successfully.",
+      });
     } catch (error) {
+      setModalState({
+        loading: false,
+        error: "Error submitting form.",
+        success: null,
+      });
       console.error("Error submitting form:", error);
     }
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setModalState(initialModalState); // Reset the modal state
   };
 
   return (
-    <div
+    <section
       id="contact-us"
       className="relative h-[100vh] w-full flex flex-col items-center justify-center bg-gradient-to-br from-bg to-white text-pri px-6 py-8 overflow-hidden"
     >
@@ -159,7 +181,7 @@ const ContactForm = () => {
         </div>
 
         {/* Budget Range */}
-        <div className="flex flex-col col-span-2">
+        <div className="flex flex-col md:col-span-2">
           <label className="mb-4 font-semibold">
             What&rsquo;s your budget range?
           </label>
@@ -196,7 +218,7 @@ const ContactForm = () => {
         </div>
 
         {/* Message Field */}
-        <div className="flex flex-col col-span-2 relative group">
+        <div className="flex flex-col md:col-span-2 relative group">
           <label className="mb-2 font-semibold group-focus-within:text-sec transition-colors duration-300">
             Message
           </label>
@@ -218,29 +240,41 @@ const ContactForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="relative w-fit mx-auto mt-6 px-6 py-3 bg-sec text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 group col-span-2"
+          className="relative w-fit mx-auto mt-6 px-6 py-3 bg-sec text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transform transition duration-300 group md:col-span-2"
         >
           <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-pri to-sec opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
           <span className="relative z-0">Submit</span>
         </button>
       </form>
 
-      {/* Success Modal */}
-      {isModalOpen && (
+      {/* Success/Error Modal */}
+      {(modalState.loading || modalState.error || modalState.success) && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-            <h2 className="text-2xl font-bold mb-4">Success!</h2>
-            <p className="mb-4">Your message has been sent successfully.</p>
-            <button
-              onClick={closeModal}
-              className="px-4 py-2 bg-sec text-white rounded-full hover:bg-pri transition duration-300"
-            >
-              Close
-            </button>
+          <div className="bg-white rounded-lg shadow-lg p-6  max-w-md text-center">
+            {(modalState.success || modalState.error) && (
+              <h2 className="text-2xl font-bold mb-4">
+                {modalState.success ? "Success!" : "Sorry"}
+              </h2>
+            )}
+            {modalState.loading && (
+              <div className="flex justify-center mb-4">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-sec "></div>
+              </div>
+            )}
+            {modalState.error && <p className="">{modalState.error}</p>}
+            {modalState.success && <p className="">{modalState.success}</p>}
+            {!modalState.loading && (
+              <button
+                onClick={closeModal}
+                className="mt-4 px-4 py-2 bg-sec text-white rounded hover:bg-sec-dark transition"
+              >
+                Close
+              </button>
+            )}
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 
