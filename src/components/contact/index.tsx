@@ -120,7 +120,7 @@ const ContactForm = () => {
   return (
     <section
       id="contact-us"
-      className="relative h-[100vh] w-full flex flex-col items-center justify-center bg-gradient-to-br from-bg to-white text-pri px-6 py-8 overflow-hidden"
+      className="relative   min-h-[calc(100vh-61px)]   w-full flex flex-col items-center justify-center bg-gradient-to-br from-bg to-white text-pri px-6 py-8 overflow-hidden"
     >
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-sec opacity-30 rounded-full blur-3xl z-0 animate-pulse"></div>

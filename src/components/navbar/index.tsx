@@ -67,7 +67,13 @@ const MenuItems = ({ onClick }: { onClick?: () => void }) => (
         e.preventDefault(); // Prevent navigation
         const section = document.getElementById("services");
 
-        section?.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (section) {
+          const yOffset = -61; // Adjust for navbar height
+          const y =
+            section.getBoundingClientRect().top + window.scrollY + yOffset;
+
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
         onClick?.();
       }}
     >
@@ -80,7 +86,12 @@ const MenuItems = ({ onClick }: { onClick?: () => void }) => (
         e.preventDefault(); // Prevent navigation
         const section = document.getElementById("contact-us");
 
-        section?.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (section) {
+          const yOffset = -61; // Adjust for navbar height
+          const y =
+            section.getBoundingClientRect().top + window.scrollY + yOffset;
+          window?.scrollTo({ top: 4186 });
+        }
         onClick?.();
       }}
     >

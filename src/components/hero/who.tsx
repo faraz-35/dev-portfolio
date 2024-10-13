@@ -1,10 +1,12 @@
+"use client";
+
 import Link from "next/link";
 
 const WhoWeAre = () => {
   return (
     <section
       id="about-us"
-      className="relative h-[calc(100vh-61px)] w-full flex flex-col justify-center items-center bg-gradient-to-br from-bg to-white text-pri px-6 py-8 overflow-hidden"
+      className="relative  min-h-[calc(100vh-61px)]  w-full flex flex-col justify-center items-center bg-gradient-to-br from-bg to-white text-pri px-6 py-8 overflow-hidden"
     >
       {/* Background Decorative Elements */}
       <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-sec opacity-20 rounded-full blur-2xl z-0 animate-pulse"></div>
@@ -21,8 +23,19 @@ const WhoWeAre = () => {
 
       {/* Call to Action Button */}
       <Link
-        href="#what-we-do"
+        href="/"
         className="relative mt-8 px-8 py-3 bg-sec text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300 group"
+        onClick={(e) => {
+          e.preventDefault(); // Prevent navigation
+          const section = document.getElementById("what-we-do");
+
+          if (section) {
+            const yOffset = -61; // Adjust for navbar height
+            const y =
+              section.getBoundingClientRect().top + window.scrollY + yOffset;
+            window?.scrollTo({ top: 4186 });
+          }
+        }}
       >
         <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-pri to-sec opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
         <span className="relative z-0">Learn more</span>
