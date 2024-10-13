@@ -51,9 +51,15 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
-html,
+
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  height: calc(100%+61);
+}
+
 body {
   height: 100%;
-  scroll-behavior: smooth;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  margin: 0;
 }

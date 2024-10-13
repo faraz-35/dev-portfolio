@@ -12,7 +12,7 @@ const WhoWeAre = () => {
       <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-sec opacity-20 rounded-full blur-2xl z-0 animate-pulse"></div>
       <div className="absolute -bottom-4 right-1/4 w-40 h-40 bg-pri opacity-30 rounded-full blur-3xl z-0 animate-spin-slow"></div>
 
-      <h1 className=" text-3xl md:text-4xl lg:leading-[1.3] lg:text-6xl text-center font-bold lg:font-extrabold mb-6 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec ">
+      <h1 className=" text-3xl leading-[1.3] md:leading-[1.3] lg:leading-[1.3] md:text-4xl  lg:text-6xl text-center font-bold lg:font-extrabold mb-6 animate-slide-in text-transparent bg-clip-text bg-gradient-to-r from-pri to-sec ">
         Lightangle Technologies
       </h1>
       {/* Subheading Section */}
@@ -33,7 +33,7 @@ const WhoWeAre = () => {
             const yOffset = -61; // Adjust for navbar height
             const y =
               section.getBoundingClientRect().top + window.scrollY + yOffset;
-            window?.scrollTo({ top: 4186 });
+            window?.scrollTo({ top: y, behavior: "smooth" });
           }
         }}
       >

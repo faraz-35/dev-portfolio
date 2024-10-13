@@ -35,7 +35,7 @@ const WhatWeDo = () => {
             const yOffset = -61; // Adjust for navbar height
             const y =
               section.getBoundingClientRect().top + window.scrollY + yOffset;
-            window?.scrollTo({ top: 4186 });
+            window?.scrollTo({ top: y, behavior: "smooth" });
           }
         }}
       >
